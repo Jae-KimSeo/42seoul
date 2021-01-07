@@ -62,7 +62,7 @@ char	*ft_itoa(int n)
 		sign = '-';
 		count++;
 	}
-	if (!(ret = malloc(sizeof(char) * count + 1)))
+	if (!(ret = malloc(sizeof(char) * (count + 1))))
 		return (NULL);
 	ret = allocate_digit(ret, n, count, sign);
 	return (ret);

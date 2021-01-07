@@ -6,7 +6,7 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 12:48:41 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/06 15:07:00 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/07 21:31:57 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	while (check_trim(*(s1 + len_s1 - 1 - end), set))
 		end += check_trim(*(s1 + len_s1 - 1 - end), set);
-	ptr = malloc(sizeof(char) * (len_s1 - front - end) + 1);
+	ptr = malloc(sizeof(char) * (len_s1 - front - end + 1));
 	if (ptr == NULL)
 		return (NULL);
 	ft_strlcpy(ptr, s1 + front, len_s1 - front - end + 1);
