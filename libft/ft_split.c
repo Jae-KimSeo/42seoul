@@ -6,13 +6,13 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 12:45:19 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/06 15:06:14 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/08 18:54:11 by toispre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*erase_deli(char *ptr, char c)
+static char		*erase_deli(char *ptr, char c)
 {
 	if (!*ptr)
 		return (NULL);
@@ -21,7 +21,7 @@ char		*erase_deli(char *ptr, char c)
 	return (ptr);
 }
 
-size_t		get_count(char const *s, char c)
+static size_t	get_count(char const *s, char c)
 {
 	size_t		ret;
 	char		*ptr;
@@ -29,6 +29,8 @@ size_t		get_count(char const *s, char c)
 	ret = 0;
 	if (*s == '\0')
 		return (0);
+	if (c == 0)
+		return (1);
 	ptr = (char*)s;
 	ptr = erase_deli(ptr, c);
 	while (*ptr)
@@ -41,7 +43,7 @@ size_t		get_count(char const *s, char c)
 	return (ret);
 }
 
-void		allocate_part(char **ret, char const *s, char c, size_t count)
+static void		allocate_part(char **ret, char const *s, char c, size_t count)
 {
 	char		*ptr_forward;
 	char		*ptr;
@@ -62,6 +64,7 @@ void		allocate_part(char **ret, char const *s, char c, size_t count)
 			while (i)
 				free(ret[--i]);
 			ret = NULL;
+			free(ret);
 		}
 		ret[i++] = part;
 		ptr = ptr_forward;
@@ -69,7 +72,7 @@ void		allocate_part(char **ret, char const *s, char c, size_t count)
 	ret[i] = 0;
 }
 
-char		**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
 	size_t		count;
 	char		**ret;
@@ -79,6 +82,9 @@ char		**ft_split(char const *s, char c)
 	count = get_count(s, c);
 	if (!(ret = (char**)malloc(sizeof(char*) * (count + 1))))
 		return (NULL);
+	ret[count] = 0;
+	if (count == 0)
+		return (ret);
 	allocate_part(ret, s, c, count);
 	return (ret);
 }

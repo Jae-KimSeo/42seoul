@@ -30,7 +30,7 @@ void (*del)(void *))
 		{
 			while (ret)
 			{
-				ft_lstdelone(ret, del);
+				ft_lstclear(&ret, del);
 				ret = ret->next;
 			}
 			return (NULL);

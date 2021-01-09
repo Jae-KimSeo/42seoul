@@ -6,13 +6,13 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:12:58 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/06 15:06:06 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/08 11:29:39 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	write_digit(int n, int fd, int div)
+static void		write_digit(int n, int fd, int div)
 {
 	char c;
 
@@ -32,7 +32,7 @@ void	write_digit(int n, int fd, int div)
 	write(fd, &c, 1);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void			ft_putnbr_fd(int n, int fd)
 {
 	int tmp;
 	int div;

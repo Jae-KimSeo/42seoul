@@ -6,13 +6,13 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 00:27:44 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/06 15:30:51 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/08 11:30:26 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	count_digit(int n)
+static size_t	count_digit(int n)
 {
 	size_t	ret;
 
@@ -27,7 +27,7 @@ size_t	count_digit(int n)
 	return (ret);
 }
 
-char	*allocate_digit(char *ret, int n, size_t count, char sign)
+static char		*allocate_digit(char *ret, int n, size_t count, char sign)
 {
 	if (n == 0)
 		*ret = 48;
@@ -49,7 +49,7 @@ char	*allocate_digit(char *ret, int n, size_t count, char sign)
 	return (ret);
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	size_t		count;
 	char		sign;

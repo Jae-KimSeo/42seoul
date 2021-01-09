@@ -6,13 +6,13 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 12:48:41 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/07 21:31:57 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/08 11:26:37 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				check_trim(char a, char const *set)
+static int				check_trim(char a, char const *set)
 {
 	int			i;
 
@@ -26,7 +26,7 @@ int				check_trim(char a, char const *set)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char					*ft_strtrim(char const *s1, char const *set)
 {
 	char		*ptr;
 	size_t		len_s1;
