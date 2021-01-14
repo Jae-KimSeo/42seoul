@@ -6,7 +6,7 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 13:32:35 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/11 14:53:11 by toispre          ###   ########.fr       */
+/*   Updated: 2021/01/14 21:19:10 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_itoa(long long n);
-char                *ft_itoa_base(long long n, int base);
-char                *ft_itoa_base_unsign(unsigned long long n, size_t base);
+char				*ft_itoa_base(long long n, int base);
+char				*ft_itoa_base_unsign(unsigned long long n, size_t base);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);

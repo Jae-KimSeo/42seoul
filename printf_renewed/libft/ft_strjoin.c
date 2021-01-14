@@ -6,7 +6,7 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 12:33:32 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/07 21:30:34 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/14 21:19:38 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char			*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	if(!(ptr = malloc(sizeof(char) * (len1 + len2 + 1))))
-        return (NULL);
+	if (!(ptr = malloc(sizeof(char) * (len1 + len2 + 1))))
+		return (NULL);
 	ft_strlcpy(ptr, s1, len1 + 1);
 	ft_strlcpy(ptr + len1, s2, len2 + 1);
 	return (ptr);
