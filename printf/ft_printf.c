@@ -6,22 +6,34 @@
 /*   By: jae-kim <jae-kim@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 21:21:31 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/14 21:25:51 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/01/15 01:49:02 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+#include <stdio.h>
 
 static t_options		init_option(void)
 {
-    t_options			ret;
+	t_options			ret;
 
 	ret.minus = 0;
-	ret.zero = 0; 
+	ret.zero = 0;
 	ret.width = 0;
 	ret.precision = -1;
 	ret.type = 0;
 	return (ret);
+}
+
+static char				*print_plain_str(char *traverse, int *len)
+{
+	while (*traverse != '%' && *traverse)
+	{
+		ft_putchar_fd(*traverse, 1);
+		*len += 1;
+		traverse++;
+	}
+	return (traverse);
 }
 
 static int				print_one_set(t_options *set, va_list arg)
@@ -42,25 +54,20 @@ static int				print_one_set(t_options *set, va_list arg)
 	return (temp_len);
 }
 
-int						ft_printf(char* format,...)
+int						ft_printf(char *format, ...)
 {
-    char				*traverse;
-    t_options			set;
-    va_list				arg;
-    int					sum_len;
-    int					temp_len;
- 
+	char				*traverse;
+	t_options			set;
+	va_list				arg;
+	int					sum_len;
+	int					temp_len;
+
 	traverse = format;
 	va_start(arg, format);
 	sum_len = 0;
 	while (*traverse)
 	{
-		while (*traverse != '%' && *traverse)
-		{
-			ft_putchar_fd(*traverse, 1);
-			sum_len++;
-			traverse++;
-		}
+		traverse = print_plain_str(traverse, &sum_len);
 		if (!*traverse)
 			break ;
 		traverse++;
@@ -75,4 +82,3 @@ int						ft_printf(char* format,...)
 	va_end(arg);
 	return (sum_len);
 }
-
