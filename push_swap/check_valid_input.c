@@ -72,8 +72,8 @@
             ptr = ptr->prev;
         }
         // 숫자가 아닌지
-        while (input[i]){
-            if (ft_isdigit(input[i] == 0))
+        while (input[i]){	
+            if (ft_isdigit(input[i]) == 0)
                 return (FALSE);
             i++;
         }

@@ -14,7 +14,7 @@ int sa(Stack *a, int ss){
       return (0);
     if (ss == 0){
       //dup2(1, STDOUT_FILENO);
-      write(1, "sa\n", sizeof("sa\n"));
+      write(1, "sa\n", 3);
       //write(4, "sa\n", sizeof("sa\n"));
  
     }
@@ -31,7 +31,7 @@ int sb(Stack *b, int ss){
     if (size(*b) < 2)
       return (0);
     if (ss == 0){
-      write(1, "sb\n", sizeof("sb\n"));
+      write(1, "sb\n", 3);
       //write(4, "sb\n", sizeof("sb\n"));
     }
     element m, n;
@@ -49,7 +49,7 @@ int ss(Stack *a, Stack *b){
     if (size(*b) == 0)
       return (0);
 
-  write(1, "ss\n", sizeof("ss\n"));
+  write(1, "ss\n", 3);
   //write(4, "ss\n", sizeof("ss\n"));
   sa(a, 1);
   sb(b, 1); 
@@ -63,7 +63,7 @@ int pa(Stack *a, Stack *b){
     return (0);
   }
 
-  write(1, "pa\n", sizeof("pa\n"));
+  write(1, "pa\n", 3);
   //write(4, "pa\n", sizeof("pa\n"));
   
   element item;
@@ -78,7 +78,7 @@ int pb(Stack *a, Stack *b){
   if (IsEmpty(*a)){
     return (0);
   }
-  write(1, "pb\n", sizeof("pb\n"));
+  write(1, "pb\n", 3);
   //write(4, "pb\n", sizeof("pb\n"));
   
   element item;
@@ -93,7 +93,7 @@ int ra(Stack *a, int rr){
   if (size(*a) < 2)
       return (0);
   if (rr == 0){
-    write(1, "ra\n", sizeof("ra\n"));
+    write(1, "ra\n", 3);
     //write(4, "ra\n", sizeof("ra\n"));
   }
   element item;
@@ -109,7 +109,7 @@ int rb(Stack *b, int rr) {
   if (size(*b) < 2)
     return (0);
   if (rr == 0){
-    write(1, "rb\n", sizeof("rb\n"));
+    write(1, "rb\n", 3);
     //write(4, "rb\n", sizeof("rb\n"));
   }
   element item;
@@ -125,7 +125,7 @@ int rr(Stack *a, Stack *b){
     if (size(*b) == 0)
       return (0);
 
-  write(1, "rr\n", sizeof("rr\n"));
+  write(1, "rr\n", 3);
   //write(4, "rr\n", sizeof("rr\n"));
   ra(a, 1);
   rb(b, 1);
@@ -138,7 +138,7 @@ int rra(Stack *a, int rrr){
   if (a->count < 2)
       return (0);
   if (rrr == 0){
-    write(1, "rra\n", sizeof("rra\n"));
+    write(1, "rra\n", 4);
     //write(4, "rra\n", sizeof("rra\n"));
 
   }
@@ -153,7 +153,7 @@ int rrb(Stack *b, int rrr){
   if (b->count < 2)
       return (0);
   if (rrr == 0){
-    write(1, "rrb\n", sizeof("rrb\n"));
+    write(1, "rrb\n", 4);
     //write(4, "rrb\n", sizeof("rrb\n"));
 
   }
@@ -169,7 +169,7 @@ int rrr(Stack *a, Stack *b){
       return (0);  
     if (size(*b) == 0)
       return (0);
-  write(1, "rrr\n", sizeof("rrr\n"));
+  write(1, "rrr\n", 4);
   //write(4, "rrr\n", sizeof("rrr\n"));
   rra(a, 1);
   rrb(b, 1);

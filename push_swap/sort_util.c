@@ -1,75 +1,84 @@
 #include "push_swap.h"
 
-/*
-int check_already_sorted(Stack a){
-    int first, second;
-    
-    first = atoi(pop_head(a));
-    while (!IsEmpty(a)){
-        second = atoi(pop_head(a));
-        if (first > second)
-            return (FALSE);
-        first = second;
+int get_middle_pivot(Stack *a, int cnt){
+    int index;
+    int num;
+    int element;
+    int max;
+    ListNode *ptr;
+
+    if (cnt % 2 ==  1)
+        index = (int)(cnt/2) + 1;
+    else
+    {
+        index = (int)(cnt/2);
     }
-    return (TRUE);
+    
+	max = INT_MAX;
+	int cur_max;
+    while (index != 0){
+        num = cnt;
+        ptr = a->head;
+		cur_max = -1;
+        while (num != 0){
+            element = atoi(ptr->data);
+            if (element > cur_max && element < max){
+                cur_max = element;
+            }
+            ptr = ptr->prev;
+            num--;
+        }
+		max = cur_max;
+        index--;
+    }// 특정 수 보다 작은 max 값 루프로 차순위 큰 값 찾기 
+    return (cur_max);
 }
-*/
-
-
 
 void sort_under_6_over_3_A(Stack *a, Stack *b, int cnt, Pushswap *p){
     
-    int min;
-    int head;
-    int post_head;
-    int tail;
-    int code;
+    int pivot;
     int num;
-
+    int cnt_pb;
+    int cnt_ra;
+    ListNode *ptr;
+    cnt_pb = 0;
+    cnt_ra = 0;
+    pivot = get_middle_pivot(a, cnt);
     num = cnt;
-    while (num > 3){
-        print_stack(a, b);
-        min = INT_MAX;
-        head = atoi(a->head->data);
-        post_head = atoi(a->head->prev->data);
-        tail = atoi(a->tail->data);
-        if (head > post_head){
-            min = post_head;
-            code = 2;
+	int part;
+
+	part = TRUE;
+	if (size(*a) == cnt)
+		part = FALSE;
+    while (num != 0){
+        ptr = a->head;
+        if (atoi(ptr->data) < pivot){
+            pb(a, b);
+            cnt_pb++;
+            p->count++;
         }
         else{
-            min = head;
-            code = 1;    
-        }
-        if (min > tail){
-            min = tail;
-            code = 3;
-        }
-    
-        if (code == 1){
-            pb(a, b);
-            p->count++;
-        }
-        else if (code == 2){
-            sa(a, 0);
-            pb(a, b);
-            p->count += 2;
-        } else {
-            rra(a, 0);
-            pb(a, b);
-            p->count += 2;
-        }
-        if (num == 5 && code == 3){
-            rra(a, 0);
-            p->count++;
-        }else if (num == 5){
             ra(a, 0);
+            cnt_ra++;
             p->count++;
         }
+		if ((cnt_pb == (int)(cnt/2)) && (part == FALSE)){
+			cnt_ra = cnt - cnt_pb;
+			break;
+		}
         num--;
     }
-    sort_under_4_A(a, b, num, p);
-    sort_under_4_B(a, b, 2, p);
+    int i;
+    i = 0;
+	if (part == TRUE){
+    	while (i < cnt_ra){
+        	rra(a, 0);
+        	p->count++;
+        	i++;
+    	}
+	}
+    sort_under_4_A(a, b, cnt_ra, p);
+    sort_under_4_B(a, b, cnt_pb, p);
 }
 
 void sort_under_4_A(Stack *a, Stack *b, int cnt, Pushswap* p){
@@ -85,57 +94,38 @@ void sort_under_4_A(Stack *a, Stack *b, int cnt, Pushswap* p){
 
   num = cnt;
 
-  /*
-  while (num >= 3){
-
-    tmp_cnt = 0;
-    rotate_num = 0;
-    ptr= a->head;
-    min = a_top = atoi(ptr->data);
-    for (int i = 0; i < num; i++){ 
-      a_top = atoi(ptr->data);
-      if (a_top < min){
-        min = a_top;
-        rotate_num = tmp_cnt;
-      }
-      tmp_cnt++;
-      ptr = ptr->prev;
-    }
-    if (IsFull(*b))
-      return ;
-    for (int i = 0; i < rotate_num; i++)
-        ra(a, 0);
-    pb(a, b);
-    for (int i = 0; i < rotate_num; i++)
-        rra(a, 0);    
-    num--;
-}
-*/
-  
     ptr = a->head;
     if(cnt >= 2){
     
+            
             if (atoi(ptr->prev->data) < atoi(ptr->data)){
-               sa(a, 0);
+                sa(a, 0);
                 p->count++;
-        
+            }
             ptr = a->head->prev;
             if (cnt == 3){
-                if (atoi(ptr->prev->data) < atoi(ptr->data)){
-                    ra(a, 0);
-                    sa(a, 0);
-                    rra(a, 0);
-                    p->count+=3;
-                    ptr = a->head;
-                    if (atoi(ptr->data) > atoi(ptr->prev->data)){
-                        sa(a, 0);
+                if (size(*a) == cnt){
+                    if (atoi(ptr->prev->data) < atoi(ptr->data)){
+                        rra(a, 0);
                         p->count++;
                     }
+                }else{
+                    if (atoi(ptr->prev->data) < atoi(ptr->data)){
+                        ra(a, 0);
+                        sa(a, 0);
+                        rra(a, 0);
+                        p->count+=3;
+                        }
+                    }
+                ptr = a->head;
+                if (atoi(ptr->data) > atoi(ptr->prev->data)){
+                        sa(a, 0);
+                        p->count++;
                 }
             }
         }
     }
-}
+
 
 
 

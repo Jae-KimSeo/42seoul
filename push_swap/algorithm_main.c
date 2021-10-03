@@ -55,7 +55,7 @@ void a_to_b(Stack *a, Stack *b, int cnt, Pushswap *p){
   }
   p->count += cnt_ra + cnt_rb + cnt_pb;
     if (cnt_ra - cnt_rb > 2 || cnt_ra - cnt_rb < -2){
-      printf("PIVOT_ERROR");
+      write(1, "PIVOT_ERROR\n", 12);
       return ;
     }
 
@@ -127,7 +127,7 @@ void b_to_a(Stack *a, Stack *b, int cnt, Pushswap *p){
   p->count += cnt_rb + cnt_ra + cnt_pa;
   a_to_b(a, b, cnt_pa - cnt_ra, p);
   if (cnt_ra - cnt_rb > 2 || cnt_ra - cnt_rb < -2){
-      printf("PIVOT_ERROR");
+      write(1, "PIVOT_ERROR\n", 12);
       return ;
   }
   if (cnt_ra < cnt_rb){
@@ -189,11 +189,11 @@ int main(int argc, char* argv[]){
     //pipe(fds);
     //close(fds[0]);
     a_to_b(a, b, size(*a), p);
-    
     //close(fds[1]);
     //printf("check fd %d, %d\n", fds[0], fds[1]);
     //close(fds[1]); 
     //print_stack(a, b);
+    printf("count %d", p->count);
     
     exit(0);
     //printf("instruction : %d\n", p->count);

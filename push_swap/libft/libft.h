@@ -6,7 +6,7 @@
 /*   By: jae-kim <jae-kim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 13:32:35 by jae-kim           #+#    #+#             */
-/*   Updated: 2021/01/06 15:35:13 by jae-kim          ###   ########.fr       */
+/*   Updated: 2021/10/03 15:11:00 by jae-kim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char				*ft_strnstr(const char *haystack, \
 					const char *needle, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_isalpha(int c);
-int					ft_isdigit(int c);
+int					ft_isdigit(char c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
