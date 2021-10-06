@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: seungyel <seungyel@student.42seoul.kr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/01/07 21:25:21 by jae-kim           #+#    #+#              #
-#    Updated: 2021/10/05 12:37:11 by seungyel         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = gcc
 NAME=libft.a
 SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
