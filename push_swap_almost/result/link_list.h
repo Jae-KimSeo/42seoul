@@ -3,12 +3,13 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "libft/libft.h"
 
 typedef char	*t_element;
 typedef struct	s_ListNode{
 	t_element			data;
-	struct t_ListNode	*prev;
-	struct t_ListNode	*next;
+	struct s_ListNode	*prev;
+	struct s_ListNode	*next;
 }				t_ListNode;
 t_ListNode	*insert_first(t_ListNode *head, t_element value);
 t_ListNode	*insert_last(t_ListNode	*tail, t_element value);

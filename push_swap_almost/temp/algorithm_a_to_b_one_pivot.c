@@ -80,7 +80,7 @@ int	process_a_to_b_one(Stack *a, Stack *b, int cnt, int *cur_cnt)
 	return (count);
 }
 
-void	sort_using_one_A(Stack *a, Stack *b, int cnt, Pushswap *p)
+void	sort_using_one_A(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	int		*cur_cnt;
 

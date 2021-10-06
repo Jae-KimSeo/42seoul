@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include "stdio.h"
 
 int	parcing_input(int argc, char **argv, t_Stack *a)
 {
@@ -86,9 +87,10 @@ int	check_sorted(t_Stack *a, int cnt)
 	if (size(*a) < 2)
 		return (TRUE);
 	ptr = a->head;
+	num = cnt;
 	while (ptr->prev && num != 0)
 	{
-		if (atoi(ptr->data) > atoi(ptr->prev->data))
+		if (ft_atoi(ptr->data) > ft_atoi(ptr->prev->data))
 			return (FALSE);
 		ptr = ptr->prev;
 		num--;

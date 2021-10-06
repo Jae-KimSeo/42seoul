@@ -45,7 +45,7 @@ int	*process_a_to_b(Stack *a, Stack *b, int cnt)
 	return (ret);
 }
 
-void	a_to_b(Stack *a, Stack *b, int cnt, Pushswap *p)
+void	a_to_b(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	int		*cur_cnt;
 
@@ -120,7 +120,7 @@ int check_already_divided(int cnt, int cur_cnt, int code){
 }
   pivot_index_big = get_high_pivot(*a, cnt);
   pivot_index_small = get_low_pivot(*a, cnt);
-  while(!IsEmpty(*a) && cnt != 0) // ra, rb 최적화 포함 
+  while(!IsEmpty(*a) && cnt != 0) // ra, rb 최적화 포함
   {
     a_top = ft_atoi(a->head->data);
     if (a_top >= pivot_index_big)
@@ -128,7 +128,7 @@ int check_already_divided(int cnt, int cur_cnt, int code){
       ra(a, 0);
       cnt_ra++;
     }
-    else 
+    else
 	{
       pb(a, b);
       cnt_pb++;
@@ -136,7 +136,7 @@ int check_already_divided(int cnt, int cur_cnt, int code){
       {
 		rb(b, 0);
         cnt_rb++;
-      } 
+      }
 	}
     cnt--;
   }*/

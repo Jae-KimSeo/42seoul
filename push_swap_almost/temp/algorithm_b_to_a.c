@@ -45,7 +45,7 @@ int	*process_b_to_a(Stack *a, Stack *b, int cnt)
 	return (ret);
 }
 
-void	b_to_a(Stack *a, Stack *b, int cnt, Pushswap *p)
+void	b_to_a(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	int	*cur_cnt;
 

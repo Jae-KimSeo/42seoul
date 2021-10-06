@@ -31,7 +31,7 @@ int	main(int	argc, char		*argv[])
 {
 	Stack		*a;
 	Stack		*b;
-	Pushswap	*p;
+	t_Pushswap	*p;
 	int			count;
 	int			sorted;
 
@@ -48,6 +48,7 @@ int	main(int	argc, char		*argv[])
 		exit(0);
 	p = push_swap_init();
 	a_to_b(a, b, size(*a), p);
+	print_stack(a ,b);
 	exit(0);
 }
 

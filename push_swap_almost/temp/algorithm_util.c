@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-void sort_under_20_A(Stack *a, Stack *b, int cnt, Pushswap *p){
-    
+void sort_under_20_A(Stack *a, Stack *b, int cnt, t_Pushswap *p){
+
     int pivot;
     int num;
     int cnt_pb;
@@ -25,7 +25,7 @@ void sort_under_20_A(Stack *a, Stack *b, int cnt, Pushswap *p){
 		part = FALSE;
     while (num != 0){
         ptr = a->head;
-        if (ft_atoi(ptr->data) < pivot) // 지금 n, n+1 개씩 먹음 
+        if (ft_atoi(ptr->data) < pivot) // 지금 n, n+1 개씩 먹음
         {
             pb(a, b);
             cnt_pb++;
@@ -39,7 +39,7 @@ void sort_under_20_A(Stack *a, Stack *b, int cnt, Pushswap *p){
                 pb(a, b);
                 cnt_pb++;
                 p->count += 2;
-            } 
+            }
             else
             {
                 ra(a, 0);
@@ -47,13 +47,13 @@ void sort_under_20_A(Stack *a, Stack *b, int cnt, Pushswap *p){
                 p->count++;
             }
         }
-		if (cnt_pb == (int)(cnt/2)) // ra를 더돌리지 않을 것 
+		if (cnt_pb == (int)(cnt/2)) // ra를 더돌리지 않을 것
 			break;
         num--;
     }
     int i;
     i = 0;
-	if (part == TRUE) // rra가 의미있고 (전체가 아니라 부분), 
+	if (part == TRUE) // rra가 의미있고 (전체가 아니라 부분),
     {
     	while (i < cnt_ra)
 		{
@@ -62,13 +62,13 @@ void sort_under_20_A(Stack *a, Stack *b, int cnt, Pushswap *p){
         	i++;
     	}
 	}
-    sort_under_20_A(a, b, cnt - cnt_pb, p);// 여기에는 a스택에 있는 전체 element가 들어가야함 
+    sort_under_20_A(a, b, cnt - cnt_pb, p);// 여기에는 a스택에 있는 전체 element가 들어가야함
     b_to_a(a, b, cnt_pb, p);
     //sort_under_20_B(a, b, cnt_pb, p);
 }
 
 /*
-void sort_under_4_A(Stack *a, Stack *b, int cnt, Pushswap *p){
+void sort_under_4_A(Stack *a, Stack *b, int cnt, t_Pushswap *p){
   if (cnt == 0)
     return ;
   int a_top;
@@ -115,7 +115,7 @@ void sort_under_4_A(Stack *a, Stack *b, int cnt, Pushswap *p){
 
 
 
-void sort_under_4_B(Stack *a, Stack *b, int cnt, Pushswap *p){
+void sort_under_4_B(Stack *a, Stack *b, int cnt, t_Pushswap *p){
   if (cnt == 0){
     return ;
   }
@@ -128,9 +128,9 @@ void sort_under_4_B(Stack *a, Stack *b, int cnt, Pushswap *p){
   ListNode *ptr;
 
     num = cnt;
-    
+
   if (check_reverse_sorted(b, cnt) == TRUE)
-    {   
+    {
         while (num != 0)
         {
             pa(a, b);
@@ -157,7 +157,7 @@ void sort_under_4_B(Stack *a, Stack *b, int cnt, Pushswap *p){
             }
             else {
                 pa(a, b);
-                p->count++;    
+                p->count++;
             }
         }
         ptr = b->head;
@@ -177,7 +177,7 @@ void sort_under_4_B(Stack *a, Stack *b, int cnt, Pushswap *p){
 
 */
 /*
-void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
+void sort_under_20_B(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
     int pivot;
 	int num;
@@ -188,9 +188,9 @@ void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
 	ListNode *ptr;
 
     num = cnt;
-    
+
     if (check_reverse_sorted(b, cnt) == TRUE)
-    {   
+    {
         while (num != 0)
         {
             pa(a, b);
@@ -199,7 +199,7 @@ void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
         }
         return ;
     }
-    
+
 	if (cnt < 4){
 		sort_under_4_B(a, b, cnt, p);
 		return ;
@@ -215,7 +215,7 @@ void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
 	{
 		ptr = b->head;
 		{
-			if (ft_atoi(ptr->data) > pivot) // 2n + 1 일때 n + 1개, 2n일때 n개 
+			if (ft_atoi(ptr->data) > pivot) // 2n + 1 일때 n + 1개, 2n일때 n개
 			{
 				pa(a, b);
 				cnt_pa++;
@@ -229,7 +229,7 @@ void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
                     pa(a, b);
                     cnt_pa++;
                     p->count += 2;
-                } 
+                }
                 else
                 {
 				    rb(b, 0);
@@ -252,7 +252,7 @@ void sort_under_20_B(Stack *a, Stack *b, int cnt, Pushswap *p)
 		}
 	}
 	sort_under_20_A(a, b, cnt_pa, p);
-	sort_under_20_B(a, b, cnt - cnt_pa, p);   
+	sort_under_20_B(a, b, cnt - cnt_pa, p);
 }
 
 */

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void	sort_at_3_B(Stack *a, Stack *b, int cnt, Pushswap *p)
+static void	sort_at_3_B(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	ListNode	*ptr;
 
@@ -27,7 +27,7 @@ static void	sort_at_3_B(Stack *a, Stack *b, int cnt, Pushswap *p)
 	}
 }
 
-static void	sort_over_2_B(Stack *a, Stack *b, int cnt, Pushswap *p)
+static void	sort_over_2_B(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	ListNode	*ptr;
 
@@ -43,7 +43,7 @@ static void	sort_over_2_B(Stack *a, Stack *b, int cnt, Pushswap *p)
 	p->count++;
 }
 
-void	sort_under_4_B(Stack *a, Stack *b, int cnt, Pushswap *p)
+void	sort_under_4_B(Stack *a, Stack *b, int cnt, t_Pushswap *p)
 {
 	int			num;
 	ListNode	*ptr;

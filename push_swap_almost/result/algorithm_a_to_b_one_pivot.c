@@ -34,11 +34,11 @@ int	process_main_a_to_b_one_pivot(t_Stack *a, t_Stack *b, int *info, int *ret)
 		ret[1]++;
 	}
 	else
-		count = (a, b, info, ret);
+		count = process_at_a_stack(a, b, info, ret);
 	return (count);
 }
 
-int	check_partition(t_Stack *a, int cnt, int *cur_cnt)
+static int	check_partition(t_Stack *a, int cnt, int *cur_cnt)
 {
 	int		part;
 	int		ret;
@@ -94,8 +94,9 @@ void	sort_using_one_A(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 		return ;
 	}
 	p->count += process_a_to_b_one(a, b, cnt, cur_cnt);
+	print_stack(a, b);
 	sort_using_one_A(a, b, cnt - cur_cnt[1], p);
-	b_to_a(a, b, cur_cnt[1], p);
+	sort_using_one_B(a, b, cur_cnt[1], p);
 }
 	/*
 		cur_cnt[0] = 0; // cnt_ra

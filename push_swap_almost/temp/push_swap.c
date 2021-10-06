@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
 
-Pushswap *push_swap_init(){
-  Pushswap *ret;
-  if (!(ret = (Pushswap*)malloc(sizeof(Pushswap))))
+t_Pushswap *push_swap_init(){
+  t_Pushswap *ret;
+  if (!(ret = (t_Pushswap*)malloc(sizeof(t_Pushswap))))
     return (NULL);
   ret->count = 0;
 
@@ -16,14 +16,14 @@ int sa(Stack *a, int ss){
       //dup2(1, STDOUT_FILENO);
       write(1, "sa\n", 3);
       //write(4, "sa\n", sizeof("sa\n"));
- 
+
     }
     element m, n;
     m = pop_head(a);
     n = pop_head(a);
     push_head(a, m);
     push_head(a, n);
-    
+
     return (1);
 }
 
@@ -40,7 +40,7 @@ int sb(Stack *b, int ss){
     push_head(b, m);
     push_head(b, n);
     return (1);
-}   
+}
 
 int ss(Stack *a, Stack *b){
     if (size(*a) == 0)
@@ -52,7 +52,7 @@ int ss(Stack *a, Stack *b){
   write(1, "ss\n", 3);
   //write(4, "ss\n", sizeof("ss\n"));
   sa(a, 1);
-  sb(b, 1); 
+  sb(b, 1);
 
   return (1);
 }
@@ -65,7 +65,7 @@ int pa(Stack *a, Stack *b){
 
   write(1, "pa\n", 3);
   //write(4, "pa\n", sizeof("pa\n"));
-  
+
   element item;
   item = pop_head(b);
   push_head(a, item);
@@ -80,7 +80,7 @@ int pb(Stack *a, Stack *b){
   }
   write(1, "pb\n", 3);
   //write(4, "pb\n", sizeof("pb\n"));
-  
+
   element item;
   item = pop_head(a);
   push_head(b, item);
@@ -166,7 +166,7 @@ int rrb(Stack *b, int rrr){
 
 int rrr(Stack *a, Stack *b){
     if (size(*a) == 0)
-      return (0);  
+      return (0);
     if (size(*b) == 0)
       return (0);
   write(1, "rrr\n", 4);
@@ -175,4 +175,4 @@ int rrr(Stack *a, Stack *b){
   rrb(b, 1);
 
   return (1);
-}  
+}

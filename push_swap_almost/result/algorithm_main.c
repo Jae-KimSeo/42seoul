@@ -48,6 +48,8 @@ int	main(int	argc, char		*argv[])
 		exit(0);
 	p = push_swap_init();
 	a_to_b(a, b, size(*a), p);
+	print_stack(a ,b);
+	write(1, "999\n", 4);
 	exit(0);
 }
 

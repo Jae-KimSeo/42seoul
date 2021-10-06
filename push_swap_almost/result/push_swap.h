@@ -7,7 +7,7 @@
 # include "stack_link_list.h"
 # include "libft/libft.h"
 
-typedef struct s_pushswap {
+typedef struct s_Pushswap {
 	int		count;
 }				t_Pushswap;
 
@@ -26,13 +26,19 @@ int				rrr(t_Stack *a, t_Stack *b);
 
 void			sort_under_4_A(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
 void			sort_under_4_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
-void			sort_under_6_over_3_A(t_Stack	*a, t_Stack *b, int cnt, t_Pushswap *p);
-int				get_high_pivot(t_Stack	s, int	cnt);
-int				get_low_pivot(t_Stack	s, int	cnt);
+void			sort_using_one_A(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
+void			sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
+void			a_to_b(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
+void			b_to_a(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
 
 int				parcing_input(int argc, char **argv, t_Stack *a);
 int				check_valid_input(char *input, t_Stack *a);
 int				check_sorted(t_Stack *a, int cnt);
 int				check_reverse_sorted(t_Stack *b, int cnt);
+
+int				roll_back(t_Stack *a, t_Stack *b, int cnt_ra, int cnt_rb);
+int				get_low_pivot(t_Stack	*s, int	cnt);
+int				get_high_pivot(t_Stack	*s, int	cnt);
+int				get_middle_pivot(t_Stack *a, int cnt);
 
 #endif

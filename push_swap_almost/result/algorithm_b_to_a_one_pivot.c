@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	process_at_b(t_Stack *a, t_Stack *b, int *info, int *ret)
+int	process_at_b_stack(t_Stack *a, t_Stack *b, int *info, int *ret)
 {
 	t_ListNode	*ptr;
 	int			count;
@@ -34,11 +34,11 @@ int	process_main_b_to_a_one_pivot(t_Stack *a, t_Stack *b, int *info, int *ret)
 		ret[1]++;
 	}
 	else
-		count = process_at_b(a, b, info, ret);
+		count = process_at_b_stack(a, b, info, ret);
 	return (count);
 }
 
-int	check_partition(t_Stack *b, int cnt, int *cur_cnt)
+static int	check_partition(t_Stack *b, int cnt, int *cur_cnt)
 {
 	int		part;
 	int		ret;
@@ -80,7 +80,7 @@ int	process_b_to_a_one(t_Stack *a, t_Stack *b, int cnt, int *cur_cnt)
 	return (count);
 }
 
-void	sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, Pushswap *p)
+void	sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 {
 	int		num;
 	int		*cur_cnt;

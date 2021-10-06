@@ -38,8 +38,8 @@ int	*process_b_to_a(t_Stack *a, t_Stack *b, int cnt)
 	ret[0] = 0;
 	ret[1] = 0;
 	ret[2] = 0;
-	info[2] = get_high_pivot(*b, cnt);
-	info[1] = get_low_pivot(*b, cnt);
+	info[2] = get_high_pivot(b, cnt);
+	info[1] = get_low_pivot(b, cnt);
 	info[0] = cnt;
 	process_main_b_to_a(a, b, info, ret);
 	return (ret);
@@ -63,13 +63,17 @@ void	b_to_a(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 	}
 	if (cnt < 6)
 	{
-		sort_under_20_B(a, b, cnt, p);
+		sort_under_4_B(a, b, cnt, p);
 		return ;
 	}
 	cur_cnt = process_b_to_a(a, b, cnt);
+	print_stack(a ,b);
 	p->count += cur_cnt[0] + cur_cnt[1] + cur_cnt[2];
 	a_to_b(a, b, cur_cnt[2] - cur_cnt[0], p);
+	print_stack(a ,b);
 	p->count += roll_back(a, b, cur_cnt[0], cur_cnt[1]);
 	a_to_b(a, b, cur_cnt[0], p);
+	print_stack(a ,b);
 	b_to_a(a, b, cur_cnt[1], p);
+	print_stack(a ,b);
 }

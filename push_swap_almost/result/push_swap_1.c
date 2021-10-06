@@ -37,6 +37,7 @@ int	sb(t_Stack *b, int ss)
 	if (ss == 0)
 		write(1, "sb\n", 3);
 	m = pop_head(b);
+	write(1, "ps1 - 40\n", 8);
 	n = pop_head(b);
 	push_head(b, m);
 	push_head(b, n);
