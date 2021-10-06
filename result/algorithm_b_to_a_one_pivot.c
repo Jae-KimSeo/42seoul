@@ -82,17 +82,10 @@ int	process_b_to_a_one(t_Stack *a, t_Stack *b, int cnt, int *cur_cnt)
 	count += check_partition(b, info[1] - cur_cnt[1], cur_cnt);
 	return (count);
 }
-
-void	sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
+static int	exception_check(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 {
 	int		num;
-	int		*cur_cnt;
 
-	cur_cnt = (int *)malloc(sizeof(int) * 2);
-	if (cur_cnt == NULL)
-		return ;
-	cur_cnt[0] = 0;
-	cur_cnt[1] = 0;
 	num = cnt;
 	if (check_reverse_sorted(b, cnt) == TRUE)
 	{
@@ -102,13 +95,27 @@ void	sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 			p->count++;
 			num--;
 		}
-		return ;
+		return (TRUE);
 	}
 	if (cnt < 4)
 	{
 		sort_under_4_B(a, b, cnt, p);
-		return ;
+		return (TRUE);
 	}
+	return (FALSE);
+}
+
+void	sort_using_one_B(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
+{
+	int		*cur_cnt;
+
+	cur_cnt = (int *)malloc(sizeof(int) * 2);
+	if (cur_cnt == NULL)
+		return ;
+	cur_cnt[0] = 0;
+	cur_cnt[1] = 0;
+	if (exception_check(a, b, cnt, p))
+		return ;
 	p->count += process_b_to_a_one(a, b, cnt, cur_cnt);
 	sort_using_one_A(a, b, cur_cnt[1], p);
 	sort_using_one_B(a, b, cnt - cur_cnt[1], p);

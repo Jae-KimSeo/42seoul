@@ -1,7 +1,10 @@
 #include "push_swap.h"
 
-void input_case_plain(int argc, char **argv, t_Stack *a)
+int	input_case_correspond(int argc, char **argv, t_Stack *a, int i)
 {
+	int			input_count;
+	char		*input;
+
 	input = argv[i];
 	if (check_valid_input(input, a) == TRUE)
 	{
@@ -13,59 +16,52 @@ void input_case_plain(int argc, char **argv, t_Stack *a)
 		write(1, "Error", 5);
 		exit (1);
 	}
+	return (input_count);
+}
+
+int	input_case_split(int argc, char **argv, t_Stack *a, char **ptr)
+{
+	int			j;
+	char		*input;
+	int			input_count;
+
+	j = 0;
+	while (ptr[j])
+	{
+		input = ptr[j];
+		if (check_valid_input(input, a) == TRUE)
+		{
+			push_tail(a, input);
+			input_count++;
+		}
+		else
+		{
+			write(1, "Error", 5);
+			exit (1);
+		}
+		j++;
+	}
+	return (input_count);
 }
 
 int	parcing_input(int argc, char **argv, t_Stack *a)
 {
-	int			input_count;
-	char		*input;
 	int			i;
-	int			j;
+	int			count;
 	char		**ptr;
-
+	
 	i = 1;
+	count = 0;
 	while (argv[i])
 	{
 		ptr = ft_split(argv[i], ' ');
 		if (ft_strlen(ptr[0]) == ft_strlen(argv[i]))
-		{
-			input_case_plain(argc, argv, a);
-			//
-			input = argv[i];
-			if (check_valid_input(input, a) == TRUE)
-			{
-				push_tail(a, input);
-				input_count++;
-			}
-			else
-			{
-				write(1, "Error", 5);
-				exit (1);
-			}
-			//
-		}
+			count += input_case_correspond(argc, argv, a, i);
 		else
-		{
-			j = 0;
-			while (ptr[j])
-			{
-				input = ptr[j];
-				if (check_valid_input(input, a) == TRUE)
-				{
-					push_tail(a, input);
-					input_count++;
-				}
-				else
-				{
-					write(1, "Error", 5);
-					exit (1);
-				}
-				j++;
-			}
-		}
+			count += input_case_split(argc, argv, a, ptr);
 		i++;
 	}
-	return (input_count);
+	return (count);
 }
 
 int	check_valid_input(char *input, t_Stack *a)
@@ -89,43 +85,5 @@ int	check_valid_input(char *input, t_Stack *a)
 	}
 	if (ft_atoi(input) > INT_MAX || (ft_strlen(input) > 11))
 		return (FALSE);
-	return (TRUE);
-}
-
-int	check_sorted(t_Stack *a, int cnt)
-{
-	t_ListNode	*ptr;
-	int			num;
-
-	if (size(*a) < 2)
-		return (TRUE);
-	ptr = a->head;
-	num = cnt;
-	while (ptr->prev && num != 0)
-	{
-		if (ft_atoi(ptr->data) > ft_atoi(ptr->prev->data))
-			return (FALSE);
-		ptr = ptr->prev;
-		num--;
-	}
-	return (TRUE);
-}
-
-int	check_reverse_sorted(t_Stack *b, int cnt)
-{
-	t_ListNode	*ptr;
-	int			num;
-
-	if (size(*b) < 2)
-		return (TRUE);
-	ptr = b->head;
-	num = cnt;
-	while (ptr->prev && num != 0)
-	{
-		if (ft_atoi(ptr->data) < ft_atoi(ptr->prev->data))
-			return (FALSE);
-		ptr = ptr->prev;
-		num--;
-	}
 	return (TRUE);
 }
