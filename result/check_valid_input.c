@@ -49,7 +49,7 @@ int	parcing_input(int argc, char **argv, t_Stack *a)
 	int			i;
 	int			count;
 	char		**ptr;
-	
+
 	i = 1;
 	count = 0;
 	while (argv[i])

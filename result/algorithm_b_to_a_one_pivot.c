@@ -42,6 +42,7 @@ int	process_b_to_a_one(t_Stack *a, t_Stack *b, int cnt, int *cur_cnt)
 	count += check_partition(b, info[1] - cur_cnt[1], cur_cnt);
 	return (count);
 }
+
 static int	exception_check(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p)
 {
 	int		num;
