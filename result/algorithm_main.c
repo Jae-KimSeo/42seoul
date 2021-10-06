@@ -27,7 +27,7 @@ int	roll_back(t_Stack *a, t_Stack *b, int cnt_ra, int cnt_rb)
 	return (count);
 }
 
-int	main(int	argc, char		*argv[])
+int main(int	argc, char		*argv[])
 {
 	t_Stack		*a;
 	t_Stack		*b;

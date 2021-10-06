@@ -33,6 +33,9 @@ t_Pushswap *p);
 void			a_to_b(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
 void			b_to_a(t_Stack *a, t_Stack *b, int cnt, t_Pushswap *p);
 
+int				process_at_b_stack(t_Stack *a, t_Stack *b, int *info, int *ret);
+int				process_main_b_to_a_one_pivot(t_Stack *a, t_Stack *b, int *info, int *ret);
+
 int				parcing_input(int argc, char **argv, t_Stack *a);
 int				check_valid_input(char *input, t_Stack *a);
 int				check_sorted(t_Stack *a, int cnt);
@@ -42,5 +45,7 @@ int				roll_back(t_Stack *a, t_Stack *b, int cnt_ra, int cnt_rb);
 int				get_low_pivot(t_Stack	*s, int	cnt);
 int				get_high_pivot(t_Stack	*s, int	cnt);
 int				get_middle_pivot(t_Stack *a, int cnt);
+
+
 
 #endif
