@@ -1,4 +1,4 @@
-#include <signal.h>
+#include <signal.h> //
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +14,14 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_history
+{
+	char				*cmd;
+	char				*edit_cmd;
+	struct s_history	*next;
+	struct s_history	*prev;
+}	t_history;
 
 typedef struct s_minishell
 {
@@ -45,7 +53,14 @@ struct termios{
 };
 */
 
-#define t_minishell g_shell
+t_minishell g_shell; //global structure
+//전역 구조체로 쓰자
+//define 할 필요 없다
+//외부 소스파일에서 참조할 경우 extern
+//포인터가 아니므로 동적할당 할필요 역시 없다.
+//그럼 안쓰는애들은 초기화 안해도 되나?
+
+
 
 static void	handler(int signum)
 {
@@ -59,46 +74,140 @@ static void	handler(int signum)
     // ctrl + C 하면 다시가 나오네 ?
     // 두번째 파라미터 0이던 1이던 일단 차이 없음 그냥 버퍼 비우는 의미인듯? 버퍼 : 임시 저장소 ?
 	rl_redisplay(); // rl_line_buffer 의 값을 프롬프트와 함께 출력
-}
+}//  어떻게 끝나야되지 ?
 
-static void parce_line()
+static void init_simple_minishell(char *envp[])
 {
-	//tokenize
-	//bash에서 string 으로 받아서 for문 돌리면 나눠지는데? 뭔기준으로 나눠지는거지
-	t_list *ret;
-
-	ret->content = "pre_"
-	ret = ret->next;
-	ret->content = g_shell.line;
+	//여기서 init envp, init term이 전역 구조체에 저장되는 과정이 이루어져야함
+	signal(SIGINT, handler); // signal SIGINT, hanler 3개 다 모르네 **** // read_line->simple_minishell 로 signall 변경
+}
 
 static int read_line(void)
 {
     int				ret;
 	char			*line;
-
-	signal(SIGINT, handler); // signal SIGINT, hanler 3개 다 모르네
-	while (true)
-	{
+//	while (true)
+//	{
 		line = readline("input> ");
-		if (line)
+		if (line) //입력 없어도 개행 있어서 그런지 조건문 돌고, ctrl + D, bye(종료텍스트) 만 작동하네
 		{
 			ret = strcmp(line, "bye");
 			if (ret)
 				printf("output> %s\n", line);
 			g_shell.line = line;
 			add_history(line); // 사용자가 입력했던 문자열 불러오기->이건어디 저장되는거지 ?
-			free(line);
+			//free(line);
 			line = NULL;
 			if (!ret)
-				break ;
+				return(1) ;
 		}
 		else
 			return (1);
-	}
+//	}
 	return (0);
 }
 
+static t_list *init_list(void *content)
+{
+	t_list *ret;
 
+	ret = (t_list*)malloc(sizeof(t_list));
+	if (ret == NULL)
+	{
+		exit(1);
+		return (NULL);
+	}
+	ret->content = content;
+	ret->next = NULL;
+	return ret;
+}
+
+static t_list *parse_line(char *line)
+{
+	//tokenize
+	//bash에서 string 으로 받아서 for문 돌리면 나눠지는데? 뭔기준으로 나눠지는거지
+	t_list *ret;
+
+	ret = init_list("pre_");
+	ret->next = init_list(g_shell.line);
+	return ret;
+}
+
+static void simple_minishell(void)
+{
+	t_list *line;
+
+	if (read_line()) // 일단 여기는 문자열 없을떄랑, 종료문구 썼을 두 경우 -> 이때 exit으로 그냥 끝내면 되나 아니면 별도의 프로세스가 필요한가 ? **
+	{
+		printf("read_finish");
+		exit(1);
+	}
+	line = parse_line(g_shell.line);
+	while(line)
+	{
+		printf("check_parced : %s\n", line->content);
+		line = line->next;
+	}
+}
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	(void)argc;
+	(void)argv;
+	init_simple_minishell(envp);
+	while (true)
+		simple_minishell();
+	return (0);
+}
+
+/*
+static void	init_term(void)
+{
+	if (tcgetattr(STDIN_FILENO, &g_sh.term_ori) == -1)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		exit_minishell(1);
+	}
+	g_sh.term_sh = g_sh.term_ori;
+	g_sh.term_sh.c_lflag &= ~(ICANON | ECHO); // 비트연산후 할당 AND 연산후 할당
+	g_sh.term_sh.c_lflag |= VEOF; // OR 연산후 할당 
+	g_sh.term_sh.c_cc[VMIN] = 1;
+	g_sh.term_sh.c_cc[VTIME] = 0;
+}
+
+static void	init_envp(char *envp[])
+{
+	int		i;
+	char	*tmp_s;
+	t_list	*tmp_l;
+
+	i = 0;
+	while (envp[i])
+	{
+		tmp_s = ft_strdup(envp[i]);
+		tmp_l = ft_lstnew(tmp_s);
+		if (tmp_s == NULL || tmp_l == NULL)
+		{
+			ft_putstr_fd(strerror(errno), 2);
+			exit_minishell(1);
+		}
+		if (g_sh.envp == NULL)
+			g_sh.envp = tmp_l;
+		else
+			ft_lstlast(g_sh.envp)->next = tmp_l;
+		++i;
+	}
+}
+//term관련 함수들
+//envp
+//g.shell의 초기화
+
+
+*/
+
+
+
+/*
 static void	minishell(void)
 {
 	t_list	*ASTs;
@@ -107,39 +216,7 @@ static void	minishell(void)
 	ASTs = parse_line(g_sh.line); // 리스트에 파싱된 애들 담고
 	exec_cmd(ASTs); // 명령어 실행
 }
-
-
-static void simple_minishell(void)
-{
-    t_list *line;
-
-    read_line();
-	line = parse_line(g_shell.line);
-	while(line)
-	{
-		printf("check_parced : %s\n", line);
-		line = line->next;
-	}
-
-
-}
-
-
-
-//init_minishell : 환경변수, term setting
-//minishell 프로그램 while문을 통해 minishell함수가 계속 실행되고 라인을  읽어와서 파싱한뒤 명령을 수행해야함
-
-int	main(int argc, char *argv[], char *envp[])
-{
-	(void)argc;
-	(void)argv;
-	init_minishell(envp);
-	while (1)
-		minishell();
-	return (0);
-}
-
-
+*/
 
 /*개념적으로 정리해야되는걸 생각해보자
 envp, term 등 initlize
