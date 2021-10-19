@@ -9,9 +9,9 @@
 #define STDOUT		1
 #define STDERR		2
 
-#define TYPE_END	0 // 끝
-#define TYPE_PIPE	1 // 파이프라인
-#define TYPE_BREAK	2 // 브레이크
+#define TYPE_END	0
+#define TYPE_PIPE	1
+#define TYPE_BREAK	2
 
 #ifdef TEST_SH
 # define TEST		1
@@ -77,7 +77,7 @@ char *ft_strdup(char const *str)
 	return (copy);
 }
 
-int add_arg(t_list *cmd, char *arg) //add 할일이 뭐가있지?
+int add_arg(t_list *cmd, char *arg) 
 {
 	char	**tmp;
 	int		i;
@@ -100,7 +100,7 @@ int add_arg(t_list *cmd, char *arg) //add 할일이 뭐가있지?
 	return (EXIT_SUCCESS);
 }
 
-int list_push(t_list **list, char *arg) // 파싱 data 추가는 이거고
+int list_push(t_list **list, char *arg)
 {
 	t_list	*new;
 
@@ -147,14 +147,14 @@ int list_clear(t_list **cmds)
 	return (EXIT_SUCCESS);
 }
 
-int parse_arg(t_list **cmds, char *arg) // 파싱
+int parse_arg(t_list **cmds, char *arg)
 {
 	int	is_break;
 
-	is_break = (strcmp(";", arg) == 0); // ; 구분
+	is_break = (strcmp(";", arg) == 0);
 	if (is_break && !*cmds)
 		return (EXIT_SUCCESS);
-	else if (!is_break && (!*cmds || (*cmds)->type > TYPE_END)) // cmd의 type을 구분하긴해야하네
+	else if (!is_break && (!*cmds || (*cmds)->type > TYPE_END))
 		return (list_push(cmds, arg));
 	else if (strcmp("|", arg) == 0)
 		(*cmds)->type = TYPE_PIPE;
@@ -165,7 +165,7 @@ int parse_arg(t_list **cmds, char *arg) // 파싱
 	return (EXIT_SUCCESS);
 }
 
-int exec_cmd(t_list *cmd, char **env) // 프로세스 실행 pipe()와 execve()
+int exec_cmd(t_list *cmd, char **env)
 {
 	pid_t	pid;
 	int		ret;

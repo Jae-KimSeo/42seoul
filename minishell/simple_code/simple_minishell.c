@@ -28,7 +28,7 @@ typedef struct s_history
 typedef struct s_minishell
 {
     t_history		*history;
-	t_list			*envp;
+	t_list			*envp; //
 	int				signal;
 	int				pid;
 	int				eof;
@@ -167,4 +167,121 @@ int	main(int argc, char *argv[], char *envp[])
 		simple_minishell();
 	return (0);
 }
+
+
+
+
+echo &PATH string
+
+home : token
+
+|
+
+<<
+
+
+a << b  | cd ./local/host
+
+
+a    : char
+<<   : redirection (strcmp )
+b	 : char
+
+cd
+./local/hosy
+
+|
+
+**t_token
+
+*t_token
+
+++
+token
+&(t_token->value
+
+
+typedef struct s_token
+{
+	int		type; // |, <, cmd ->  CMD_ECHO, CMD_
+
+
+ls -l
+ls -al
+
+	-p
+echo -n string1
+//A   B    C        A   B   C
+
+// | : NOT_BREKED : tyep
+
+
+	char	*value; echo // $PATH /Home
+}			t_token;
+
+
+type enum {
+
+echo 1
+
+}
+
+
+typedef struct s_AST
+{
+	int		type;
+	void	*content
+}	t_AST
+
+
+tree : head ->leftchild, rightchild :
+
+      ㅁ
+ㅁ			ㅁ
+ㅁ ㅁ     ㅁ    ㅁ
+
+
+t_AST 라는 구조체 -> 결국 우선 순위 찾는 용도
+
+
+//echo 일 경우 첫번째 스페이스 뒤에 스페이는 문자열로 처리됨
+//echo 맨앞이랑 맨뒤 space는 인식이 안됨
+
+// echo 안녕하세요 /$PATH / 아  가   기 -> $ 1덩어리였던 문자열이 $개수 + 2 // 조건문으로
+// 환경변수가 파싱단계에서 치환이되면 echo 한덩어리로 와도 문제가 없음
+// ->
+
+//echo a     b     c     d e -> 중간 스페이스 전부다 하나
+//echo       a
+
+
+
+// echo -n
+"\n"
+
+// case
+
+// pwd
+// export
+
+
+//CMD OPTION STRING
+//10    20    30
+//11
+
+//echo -n string
+//env
+//pwd
+//export asd=bash
+//cd
+
+
+
+{
+
+	VALUE
+}
+
+
+
 

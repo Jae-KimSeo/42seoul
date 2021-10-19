@@ -6,8 +6,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
-#include <termios.h> // 얘 좀 자세히 봐야할듯
+#include <termios.h>
 
+// 얘 좀 자세히 봐야할듯
 // 구조체들을 미리 생각해보자
 
 /*
@@ -17,6 +18,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 */
+
 typedef struct s_history
 {
 	char				*cmd;
@@ -214,6 +216,7 @@ static void simple_minishell(void)
 	}
 }
 
+/*
 int	main(int argc, char *argv[], char *envp[])
 {
 	(void)argc;
@@ -222,6 +225,34 @@ int	main(int argc, char *argv[], char *envp[])
 	while (true)
 		simple_minishell();
 	return (0);
+}
+*/
+#include <stdio.h>
+
+
+int main()
+{
+	NODE_PIPE 			= (1 << 0),
+    NODE_BCKGRND 		= (1 << 1),
+    NODE_SEQ 			= (1 << 2),
+    NODE_REDIRECT_IN 	= (1 << 3),
+    NODE_REDIRECT_OUT 	= (1 << 4),
+    NODE_CMDPATH		= (1 << 5),
+    NODE_ARGUMENT		= (1 << 6),
+
+    NODE_DATA 			= (1 << 7),
+
+	printㄹ("%s\n, %s\n, %s\n, %s\n, %s\n, %s\n, %s\n",
+	NODE_PIPE
+    NODE_BCKGRND
+    NODE_SEQ
+    NODE_REDIRECT_IN
+    NODE_REDIRECT_OUT
+    NODE_CMDPATH
+    NODE_ARGUMENT
+	);
+
+    //NODE_DATA 			= (1 << 7), )
 }
 
 
