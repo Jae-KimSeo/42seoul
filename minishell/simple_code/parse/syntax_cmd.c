@@ -11,7 +11,7 @@ static	t_AST	*destructor(t_AST *result, t_cmd *cmd)
 	return (PARSE_MALLOC);
 }
 
-static int	set_args(t_cmd *cmd, t_list **arg, t_token *token)
+static int	set_args(t_cmd *cmd, t_list **arg, t_token *token)  // 인자를 만든다. 인자가 뭐지 ? 인자가 여러개일 경우
 {
 	if (!cmd->args)
 	{
@@ -31,7 +31,7 @@ static int	set_args(t_cmd *cmd, t_list **arg, t_token *token)
 	return (1);
 }
 
-static int	set_redirect(t_AST **curr, t_list **token)
+static int	set_redirect(t_AST **curr, t_list **token) // 리다이렉트도 커맨드 단에서 하네
 {
 	t_redirect	*redirect;
 
@@ -58,23 +58,23 @@ static int	set_redirect(t_AST **curr, t_list **token)
 
 static int	syntax_switch(
 	t_list **token,
-	t_cmd **cmd,
+	t_cmd **cmd, // 얘는 t_list 인자로 가진 cmd 저장 구조체
 	t_list **arg_curr,
 	t_AST **curr)
 {
-	if (((t_token *)(*token)->content)->type == LX_CMD) // command 일 경우 -> 그대로 넣어주면 된다. 
+	if (((t_token *)(*token)->content)->type == LX_CMD) // command 일 경우 -> 그대로 넣어주면 된다.
 	{
-		if (!ft_malloc((void **)cmd, sizeof(t_cmd)))
+		if (!ft_malloc((void **)cmd, sizeof(t_cmd))) // ㅇㅙ 투포인터 할당? -> 그냥 값 할당인듯?
 			return (0);
-		(*cmd)->cmd = ((t_token *)(*token)->content)->value;
+		(*cmd)->cmd = ((t_token *)(*token)->content)->value;  
 		((t_token *)(*token)->content)->value = NULL;
 	}
-	else if (((t_token *)(*token)->content)->type == LX_ARG) // 인자일 경우 
+	else if (((t_token *)(*token)->content)->type == LX_ARG) // 인자일 경우
 	{
 		if (!set_args(*cmd, arg_curr, (*token)->content))
 			return (0);
 	}
-	else if (((t_token *)(*token)->content)->type == LX_REDIRECT) // 리다이렉트 일경우 
+	else if (((t_token *)(*token)->content)->type == LX_REDIRECT) // 리다이렉트 일경우
 	{
 		if (!set_redirect(curr, token))
 			return (0);
@@ -82,19 +82,25 @@ static int	syntax_switch(
 	return (1);
 }
 
-t_AST	*syntax_cmd(t_list **token) // 토큰 한 덩어리 
+typedef struct s_cmd
+{
+	char	*cmd;
+	t_list	*args;
+}	t_cmd;
+
+t_AST	*syntax_cmd(t_list **token) // 토큰 한 덩어리
 {
 	t_AST	*result;
 	t_AST	*curr;
 	t_list	*arg_curr;
 	t_cmd	*cmd;
 
-	if (!ft_malloc((void **)&result, sizeof(t_AST))) //AST  메모리할당 
+	if (!ft_malloc((void **)&result, sizeof(t_AST))) //AST  메모리할당 t_AST 의 포인터 여야 하는거 아닌가 ?
 		return (PARSE_MALLOC);
-	curr = result;
+	curr = result; //  AST하나
 	cmd = NULL;
 	while (*token && \
-		((t_token *)(*token)->content)->type & (LX_CMD + LX_ARG + LX_REDIRECT)) // 토큰이 이 세가지중에 하나야여함 
+		((t_token *)(*token)->content)->type & (LX_CMD + LX_ARG + LX_REDIRECT)) // 토큰이 이 세가지중에 하나야여함
 	{
 		if (!syntax_switch(token, &cmd, &arg_curr, &curr))
 			return (destructor(result, cmd));
