@@ -8,15 +8,13 @@
 #include <unistd.h>
 #include <termios.h> // 얘 좀 자세히 봐야할듯
 
-// 구조체들을 미리 생각해보자
 
-/*
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-*/
+
 typedef struct s_history
 {
 	char				*cmd;
@@ -29,28 +27,19 @@ typedef struct s_minishell
 {
 	int				signal;
 	int				status;
-	int				isps2;
+	int				isps2; 
 	int				pid;
 	int				eof;
 	int				read_fd;
 	char			*line;
-	t_history		*cmd;
+	t_history		*cmd;  // 현재 cmd 
 	t_history		*history;
 	int				cmd_i;
 	int				cmd_s;
 	t_list			*envp;
 	struct termios	term_sh;
-	struct termios	term_ori;
+	struct termios	term_ori; // terminal의 상태가 변하나? 
 }	t_minishell;
-
-typedef struct	s_list
-{
-	char			**args;
-	int				length;
-	int				type;
-	struct s_list	*previous;
-	struct s_list	*next;
-}				t_list;
 
 /*참고
 struct termios{
@@ -133,59 +122,6 @@ static t_list *init_list(void *content)
 	return ret;
 }
 
-int add_arg(t_list *cmd, char *arg) //add 할일이 뭐가있지?
-{
-	char	**tmp;
-	int		i;
-
-	i = 0;
-	tmp = NULL;
-	if (!(tmp = (char**)malloc(sizeof(*tmp) * (cmd->length + 2))))
-		return (exit_fatal());
-	while (i < cmd->length)
-	{
-		tmp[i] = cmd->args[i];
-		i++;
-	}
-	if (cmd->length > 0)
-		free(cmd->args);
-	cmd->args = tmp;
-	cmd->args[i++] = ft_strdup(arg);
-	cmd->args[i] = 0;
-	cmd->length++;
-	return (EXIT_SUCCESS);
-}
-
-int list_push(t_list **list, char *arg) // 파싱 data 추가는 이거고
-{
-	t_list	*new;
-
-	if (!(new = (t_list*)malloc(sizeof(*new))))
-		return (exit_fatal());
-	new->args = NULL;
-	new->length = 0;
-	new->type = TYPE_END;
-	new->previous = NULL;
-	new->next = NULL;
-	if (*list)
-	{
-		(*list)->next = new;
-		new->previous = *list;
-	}
-	*list = new;
-	return (add_arg(new, arg));
-}
-
-int parse_arg(t_list **cmds, char *arg) // 파싱
-{
-
-	if ((!*cmds || (*cmds)->type > TYPE_END)) // cmd의 type을 구분하긴해야하네
-		return (list_push(cmds, arg)); // command를 list에 push함 list_push에서 t_list(cmd) 구조체 파싱
-	else
-		return (add_arg(*cmds, arg));
-	return (EXIT_SUCCESS);
-}
-
 static t_list *parse_line(char *line)
 {
 	//tokenize
@@ -224,9 +160,6 @@ int	main(int argc, char *argv[], char *envp[])
 	return (0);
 }
 
-
-
-
 /*
 static void	init_term(void)
 {
@@ -237,7 +170,7 @@ static void	init_term(void)
 	}
 	g_sh.term_sh = g_sh.term_ori;
 	g_sh.term_sh.c_lflag &= ~(ICANON | ECHO); // 비트연산후 할당 AND 연산후 할당
-	g_sh.term_sh.c_lflag |= VEOF; // OR 연산후 할당
+	g_sh.term_sh.c_lflag |= VEOF; // OR 연산후 할당 
 	g_sh.term_sh.c_cc[VMIN] = 1;
 	g_sh.term_sh.c_cc[VTIME] = 0;
 }
