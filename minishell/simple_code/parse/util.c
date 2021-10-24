@@ -16,3 +16,4 @@ int	ft_malloc(void **dst, size_t size)
 //  char *dst;
 // dst = malloc(sizedof (AST));
 // *dst 여기에 할당하면 *dst 자체가 주소값에 메모리할당이고, dst는 *dst의 할당된 메모리(주소_)의 주소값이니까 배열이네
+// 그냥 그냥 말록이어도 그거 못하는거 아니잖아 ?

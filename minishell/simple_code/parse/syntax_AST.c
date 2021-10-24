@@ -22,29 +22,7 @@ static t_AST	**syntax_PIPE(t_list **token, t_AST **curr)
 	return (&pipe->right);
 }
 
-static t_AST	**syntax_CTR_OP(t_list **token, t_AST **curr)
-{
-	t_AST		*result;
-	t_ctr_op	*ctrop;
 
-	if (!ft_malloc((void **)&result, sizeof(t_AST)))
-		return (0);
-	if (!ft_malloc((void **)&ctrop, sizeof(t_ctr_op)))
-	{
-		free(result);
-		return (0);
-	}
-	result->type = FT_CTR_OP;
-	result->data = ctrop;
-	if (!ft_strcmp(((t_token *)(*token)->content)->value, "&&"))
-		ctrop->type = FT_AND;
-	else if (!ft_strcmp(((t_token *)(*token)->content)->value, "||"))
-		ctrop->type = FT_OR;
-	ctrop->left = *curr;
-	*curr = result;
-	*token = (*token)->next;
-	return (&ctrop->right);
-}
 
 static t_AST	**syntax_switch(t_list **token, t_AST **curr)
 {
@@ -54,12 +32,7 @@ static t_AST	**syntax_switch(t_list **token, t_AST **curr)
 		if (curr == NULL)
 			return (PARSE_MALLOC);
 	}
-	else if (((t_token *)(*token)->content)->type == LX_CTR_OP)
-	{
-		curr = syntax_CTR_OP(token, curr);
-		if (curr == NULL)
-			return (PARSE_MALLOC);
-	}
+
 	*curr = syntax_cmd(token);
 	if (curr == NULL)
 		return (PARSE_MALLOC);

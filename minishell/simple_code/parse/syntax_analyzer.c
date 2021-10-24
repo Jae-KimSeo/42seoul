@@ -58,14 +58,14 @@ t_list	*syntax_analyzer(t_list *token)
 	//메모리할당이 어디서 이루어질지 고려해봐야되
 	curr_token = token;
 	ASTs = NULL;
-	AST = syntax_AST(&curr_token);  //
+	AST = syntax_AST(&curr_token);  
 	if (AST == NULL)
 		destructor(AST, ASTs, token);
 	ASTs = ft_lstnew(AST); // AST를 담는 리스트, 왜리스트로 만들지?
 	if (ASTs == NULL)
 		destructor(AST, ASTs, token);
 	curr = ASTs;
-	if (!analyzer(curr_token, &curr)) 
+	if (!analyzer(curr_token, &curr))
 		return (destructor(AST, ASTs, token));
 	free_token(token);
 	return (ASTs);
