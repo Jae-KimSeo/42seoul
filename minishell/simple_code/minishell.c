@@ -27,18 +27,18 @@ typedef struct s_minishell
 {
 	int				signal;
 	int				status;
-	int				isps2; 
+	int				isps2;
 	int				pid;
 	int				eof;
 	int				read_fd;
 	char			*line;
-	t_history		*cmd;  // 현재 cmd 
+	t_history		*cmd;  // 현재 cmd
 	t_history		*history;
 	int				cmd_i;
 	int				cmd_s;
 	t_list			*envp;
 	struct termios	term_sh;
-	struct termios	term_ori; // terminal의 상태가 변하나? 
+	struct termios	term_ori; // terminal의 상태가 변하나?
 }	t_minishell;
 
 /*참고
@@ -170,7 +170,7 @@ static void	init_term(void)
 	}
 	g_sh.term_sh = g_sh.term_ori;
 	g_sh.term_sh.c_lflag &= ~(ICANON | ECHO); // 비트연산후 할당 AND 연산후 할당
-	g_sh.term_sh.c_lflag |= VEOF; // OR 연산후 할당 
+	g_sh.term_sh.c_lflag |= VEOF; // OR 연산후 할당
 	g_sh.term_sh.c_cc[VMIN] = 1;
 	g_sh.term_sh.c_cc[VTIME] = 0;
 }

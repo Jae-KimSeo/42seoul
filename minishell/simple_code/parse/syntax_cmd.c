@@ -47,7 +47,7 @@ static int	set_redirect(t_AST **curr, t_list **token) // 리다이렉트도 커�
 		redirect->type = FT_FD_HEREDOC;
 	else if (!ft_strcmp(((t_token *)(*token)->content)->value, ">>"))
 		redirect->type = FT_FD_APPEND;
-	*token = (*token)->next;
+	*token = (*token)->next; // 얘를 위해서 t_list 를 투포인터로 받는거 같은데 token 리스트 넘ㄴ기려고 ? 
 	redirect->file = ((t_token *)(*token)->content)->value;
 	((t_token *)(*token)->content)->value = NULL;
 	if (!ft_malloc((void **)&redirect->AST, sizeof(t_AST)))
@@ -66,7 +66,7 @@ static int	syntax_switch(
 	{
 		if (!ft_malloc((void **)cmd, sizeof(t_cmd))) // ㅇㅙ 투포인터 할당? -> 그냥 값 할당인듯?
 			return (0);
-		(*cmd)->cmd = ((t_token *)(*token)->content)->value;  
+		(*cmd)->cmd = ((t_token *)(*token)->content)->value;
 		((t_token *)(*token)->content)->value = NULL;
 	}
 	else if (((t_token *)(*token)->content)->type == LX_ARG) // 인자일 경우
