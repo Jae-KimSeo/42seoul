@@ -2,8 +2,8 @@
 void	init(char *envp[])
 {
 	int		i;
-	char	*cur_envp;
-	t_list	*envps;
+	char	*cur_envp;  // 한줄
+	t_list	*envps; // 한줄 -> 한줄 -> 한줄
 
 	i = 0;
 	while (envp[i])
@@ -13,7 +13,10 @@ void	init(char *envp[])
 		if (g_shell.envp == NULL)
 			g_shell.envp = envps;
 		else
-			ft_lstlast(g_sh.envp)->next = envps;
+			(g_shell.envp)->next = envps;
 		i++
 	}
 }
+
+
+

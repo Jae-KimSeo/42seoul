@@ -13,12 +13,14 @@ t_list	*scan_line(char **line, int *cur_option)
 
 	while (*line)
 	{
-		ret = ft_lstnew();
 		remove_not_lexeme(&line)
 		token = (t_token *)malloc(sizeof(t_token));
 		if (token == NULL)
+		{
+			exit(1);
 			return (MALLOC_ERROR);
-		if (ft_strchr("|<>'\"", **line))
+		}
+		if (ft_strchr("|<>", **line))
 			token->value = get_special_token(line, cur_option);
 		else
 			token->value = get_plain_token(line, cur_option);

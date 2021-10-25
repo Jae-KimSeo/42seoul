@@ -39,15 +39,14 @@ static char	*get_redirect_token(char **line, int *cur_option)
 
 static char	*set_quote_option(char **line, int *cur_option)
 {
-
 	//RULLE
 	// 둘중에 닫혀있는지 일단 확인
 	// 안닫혀있는 경우라면 다른 종류의 쿼트 사이에 들어있어야함 -> 이걸 flag로 어떻게 확인하지?
-	if (ft_strcmp("'", **line))
+	if (!ft_strcmp("'", **line) && !(*cur_option != CUR_DQUOTE)) // 현재 상태가 NONE인 경우
 	{
 		cur_option ^= CUR_QUOTE;
 	}
-	else if (ft_strcmp("\"", **line))
+	else if (!ft_strcmp("\"", **line) && !(*cur_option != CUR_QUOTE))
 	{
 		cur_option ^= CUR_DQUOTE;
 	}
@@ -73,27 +72,34 @@ char	 *get_special_token(char **line, int *cur_option)
 	return (token_value);
 }
 
-
 char	*get_plain_token(char **line, int *cur_option)
 {
 	char	*token;
 	char	*plain;
+	char	*ptr;
 
-	plain = ft_strdup("");
+	ptr = ft_strdup("");
 	while (**line)
 	// 뒷 옵션 1. flag가 none이고 특수문자 가 아닌경우 -> flag 특수, 이고 특수문자
 	{
 		if ((*cur_option == CUR_NONE) && ft_strchr(" \n\t<>|", **line))
 			break;
 		set_quote_option(line, cur_option);
-		//temp[0] = **line;
-		//token = ft_strjoin_free(token, temp, 1);
-		plain = ft_strjoin_free(plain, **line);
-		if (token == NULL)
-			return ((char *)ft_free_ret(token, (char *)PARSE_MALLOC));
-		++(*line);
+		plain = ft_strjoin(ptr, **line);
+		free(ptr);
+		if (plain == NULL)
+		{
+			print("%s\n", strerror(12))
+			free(plain);
+			return (PARSE_ERROR);
+		}
+		(*line)++;
 	}
-	if (flag != TK_NONE)
-		return ((char *)ft_free_ret(token, (char *)PARSE_INVAILD));
+	if (cur_option != CUR_NONE)
+	{
+		printf("%s\n", strerror(1));
+		free(token);
+		return (PARSE_ERROR);
+	}
 	return (token);
 }

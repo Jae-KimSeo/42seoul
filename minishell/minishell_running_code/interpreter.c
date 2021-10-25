@@ -6,8 +6,13 @@ t_list	*interpreter(char *line)
 	int		error;
 
 	ret = lexical_analyzer(line);
-	ret = syntax_analyzer(ret);
-	ret = symantic_analyzer(ret, &error);
+	ret = parser(ret);
+	error = symantic_analyzer(ret);
+	if (error == 1)
+	{
+		free_AST(ret);
+		return (SYMANTIC_ERROR)
+	}
 	return (ret);
 }
 
