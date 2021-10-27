@@ -2,9 +2,9 @@
 
 t_list	*interpreter(char *line)
 {
-	t_lexer	*middle;
+	t_list	*middle;
 	t_list	*ret;
-	int		error;
+	//int		error;
 
 	middle = lexical_analyzer(line);
 	ret = syntax_analyzer(middle);
@@ -18,3 +18,4 @@ t_list	*interpreter(char *line)
 	*/
 	return (ret);
 }
+

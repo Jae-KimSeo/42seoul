@@ -57,7 +57,7 @@ static t_list	*scan_line(char **line, int *cur_option)
 	}
 	return ret; // 이거 어느위치인지 체크 구조체 원포인터일때 링크는 넘어갈까 안넘어갈까
 }
-
+/*
 static t_lexer *init_lexer(char *line, t_list *tokens)
 {
 	t_lexer *ret;
@@ -75,7 +75,7 @@ static t_lexer *init_lexer(char *line, t_list *tokens)
 
 	return (ret);
 }
-
+*/
 t_lexer *lexical_analyzer(char *line)
 {
 	t_list		*tokens;

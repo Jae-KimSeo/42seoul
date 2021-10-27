@@ -1,6 +1,6 @@
 #include "interpreter.h"
 
-t_list	*syntax_anlayzer(t_lexer *lexer)
+t_list	*syntax_anlayzer(t_list *lexer)
 {
 	t_list			*token;
 	t_list			*AST;

@@ -20,7 +20,7 @@ static int	set_args(t_cmd *cmd, t_list **arg, t_token *token)
 	return (1);
 }
 
-static int	set_redirect(t_AST **curr, t_list **token)
+static int	set_redirect(t_AST_Node **curr, t_list **token)
 {
 	t_redirect	*redirect;
 
@@ -86,7 +86,7 @@ t_AST_Node	*parse_cmd(t_list **token)
 	while (*token && \
 		((t_token *)(*token)->content)->type & (CUR_CMD | CUR_ARG | CUR_REDIRECT))
 	{
-		parse_phrase(token, &cmd, &arg, &series))
+		parse_phrase(token, &cmd, &arg, &series);
 		*token = (*token)->next;
 	}
 	series->type = TYPE_CMD;

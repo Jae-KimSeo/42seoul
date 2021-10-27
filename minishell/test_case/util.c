@@ -4,7 +4,7 @@ void malloc_error_check(void *item)
 {
     if (item == NULL)
     {
-        printf(strerror(12));
+        printf("%s\n", strerror(12));
         exit(1);
     }
 }
@@ -15,7 +15,7 @@ void	*ft_free_ret(void *target, void *ret)
 		free(target);
 	return (ret);
 }
-
+/*
 char	*ft_strjoin_free(char const *s1, char const *s2, int check)
 {
 	char	*result;
@@ -27,7 +27,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2, int check)
 		free((char *)s2);
 	return (result);
 }
-
+*/
 char	*ft_strappendc(char *str, char c)
 {
 	int		len;

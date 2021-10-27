@@ -17,12 +17,11 @@
 #define CUR_NONE		0
 #define CUR_PIPE		1
 #define CUR_REDIRECT	2
-#define CUR_QUOTE		4
-#define CUR_DQUOTE		8
-#define CUR_AFTER_FD	16
-#define CUR_CMD			32
-#define CUR_ARG			64
-
+#define CUR_AFTER_FD	4
+#define CUR_CMD			8
+#define CUR_ARG			16
+#define CUR_QUOTE		32
+#define CUR_DQUOTE		64
 
 #define TYPE_PIPE 		 	0
 #define TYPE_REDIRECT		1
@@ -47,13 +46,13 @@ typedef enum type
 	TYPE_REDIR_APPEND = 64
 }TYPE;
 */
-
+/*
 typedef struct		s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
+*/
 typedef struct		s_token
 {
 	int		type;
@@ -95,18 +94,20 @@ typedef struct s_redirect
 }	t_redirect;
 
 
-t_list	*interpreter(char *line);
-t_lexer *lexical_analyzer(char *line);
-char	 *get_special_item(char **line, int *cur_option);
-char	*get_plain_item(char **line, int *cur_option);
-t_list	*syntax_analyzer(t_lexer *lexer);
-t_AST_Node	*parse_cmd(t_list **token);
-t_AST_Node	*parse_get_node(t_list *token);
-int	seriezer(t_list *token, t_list **curr);
-void	print_AST(t_AST_Node	*AST, int depth);
+t_list			*interpreter(char *line);
+t_list			*lexical_analyzer(char *line);
+char			*get_special_item(char **line, int *cur_option);
+char			*get_plain_item(char **line);
+t_list			*syntax_analyzer(t_list *token);
+t_AST_Node		*parse_cmd(t_list **token);
+t_AST_Node		*parse_get_node(t_list **token);
+int				seriezer(t_list *token, t_list **curr);
+void			print_AST(t_AST_Node	*AST, int depth);
 
-int	ft_malloc(void **dst, size_t size);
-char	*ft_strappendc(char *str, char c);
-char	*ft_strjoin_free(char const *s1, char const *s2, int check);
-void malloc_error_check(void *item);
-void	*ft_free_ret(void *target, void *ret);
+int				ft_malloc(void **dst, size_t size);
+char			*ft_strappendc(char *str, char c);
+void			malloc_error_check(void *item);
+void			*ft_free_ret(void *target, void *ret);
+
+void	print_AST(t_AST_Node	*AST, int depth);
+void	print_CMD(t_cmd *cmd, int depth);

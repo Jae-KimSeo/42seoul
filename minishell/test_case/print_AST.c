@@ -21,6 +21,7 @@
 # define NORMALIZE_CMD	0
 # define NORMALIZE_ARG	1
 
+/*
 void	print_parse_err(t_list *err)
 {
 	if (err == (t_list *)PARSE_MALLOC)
@@ -30,6 +31,7 @@ void	print_parse_err(t_list *err)
 	if (err == (t_list *)PARSE_INVAILD)
 		ft_putstr_fd(PARSE_INVAILD_MSG, 2);
 }
+*/
 
 void	print_depth(int depth)
 {
@@ -44,16 +46,16 @@ void	print_REDIRECT(t_redirect *redirect, int depth)
 	print_depth(depth);
 	printf("\tredirect-> %s%d%s\n", VALUE_COLOR, redirect->type, TEXT_COLOR);
 	print_depth(depth);
-	printf("\tfile-> %s%s%s\n", VALUE_COLOR, redirect->file, TEXT_COLOR);
+	printf("\tfile-> %s%s%s\n", VALUE_COLOR, redirect->after_fd, TEXT_COLOR);
 	print_depth(depth);
 	printf("\tAST->\n");
-	if (redirect->AST == NULL)
+	if (redirect->child == NULL)
 	{
 		print_depth(depth);
 		printf("\t%s(NULL)%s\n", VALUE_COLOR, TEXT_COLOR);
 	}
 	else
-		print_AST(redirect->AST, depth + 1);
+		print_AST(redirect->child, depth + 1);
 	print_depth(depth);
 	printf("}\n");
 }
@@ -89,21 +91,21 @@ void	print_PIPE(t_pipe *pipe, int depth)
 	printf("\tPIPE\n");
 	print_depth(depth);
 	printf("\t%sleft->\n", TEXT_COLOR);
-	print_AST(pipe->left, depth + 1);
+	print_AST(pipe->leftchild, depth + 1);
 	print_depth(depth);
 	printf("\t%sright->\n", TEXT_COLOR);
-	print_AST(pipe->right, depth + 1);
+	print_AST(pipe->rightchild, depth + 1);
 	print_depth(depth);
 	printf("}\n");
 }
 
 void	print_AST(t_AST_Node	*AST, int depth)
 {
-	if (AST->type == FT_CMD)
-		print_CMD(AST->data, depth);
-	else if (AST->type == FT_PIPE)
-		print_PIPE(AST->data, depth);
-	else if (AST->type == FT_REDIRECT)
-		print_REDIRECT(AST->data, depth);
+	if (AST->type == TYPE_CMD)
+		print_CMD(AST->content, depth);
+	else if (AST->type == TYPE_PIPE)
+		print_PIPE(AST->content, depth);
+	else if (AST->type == TYPE_REDIRECT)
+		print_REDIRECT(AST->content, depth);
 	ft_putstr_fd(NO_COLOR, 1);
 }
