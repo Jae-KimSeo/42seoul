@@ -128,14 +128,8 @@ static t_list	*scan_line(char **line, int *cur_option)
 		else
 			token = get_plain_token(token, line, cur_option);
 		ret->next = ft_lstnew(token);
-		printf("token check_value : %s, type : %d\n", ((t_token *)ret->content)->value, ((t_token *)ret->content)->type);
- 		ret = ret->next;
+		ret = ret->next;
 	}
-	printf("line: 138 token check_value : %s, type : %d\n", ((t_token *)head->content)->value, ((t_token *)head->content)->type);
-	head = head->next;
-	//printf("line: 140 token check_value : %s, type : %d\n", ((t_token *)head->content)->value, ((t_token *)head->content)->type);
-
-
 	return (head); // 이거 어느위치인지 체크 구조체 원포인터일때 링크는 넘어갈까 안넘어갈까
 }
 /*
@@ -157,28 +151,9 @@ t_list *lexical_analyzer(char *line)
 {
 	t_list		*tokens;
 	int			cur_option;
-	int count;
-	t_list		*temp_print;
 
 	cur_option = CUR_NONE;
 	tokens = scan_line(&line, &cur_option);
-
-	count = 0;
-	temp_print = tokens;
-
-	while (temp_print)
-	{
-		printf("temp_token check_value : %s, type : %d count : %d\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->type, count);
-		temp_print = temp_print->next;
-		count++;
-	}
-	while (tokens)
-	{
-		printf("temp_token check_value : %s, type : %d count : %d\n", ((t_token *)tokens->content)->value, ((t_token *)tokens->content)->type, count);
-		tokens = tokens->next;
-		count++;
-	}
-
 	return (tokens);
 }
 

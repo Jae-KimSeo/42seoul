@@ -2,12 +2,22 @@
 
 int main()
 {
-	t_list *test;
+	t_AST_Node *test;
 
 	test = interpreter("echo 5 < 3 | export happy=id app tas | cat 3 < file.txt");
-	printf("test check : %d\n",(((t_AST_Node *)(test->content))->type));
+	
+
+	/*
+	while(test)
+	{
+		printf("node_type : %d\n", test->type);
+		printf("left_cheild : %d right child : %d\n", ((t_pipe *)(test->content))->leftchild->type, ((t_pipe *)(test->content))->rightchild->type);
+	}
+	*/
+
+	//그냥 내일 print_AST를 손봐야할듯 
+	print_AST(test, 0);
 	//print_CMD(((t_AST_Node *)(test->content))->content, 2);
-    //print_AST(((t_AST_Node *)(test->content)), 10); // () ㅇㅣ거 붙이고 안붙이고 차이
 	/*
 	while (test->next)
 	{

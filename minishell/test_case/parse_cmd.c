@@ -83,6 +83,7 @@ t_AST_Node	*parse_cmd(t_list **token)
 	node = (t_AST_Node *)malloc(sizeof(t_AST_Node));
 	malloc_error_check(node);
 	series = node;
+
 	while (*token && \
 		((t_token *)(*token)->content)->type & (CUR_CMD | CUR_ARG | CUR_REDIRECT))
 	{

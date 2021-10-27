@@ -94,11 +94,11 @@ typedef struct s_redirect
 }	t_redirect;
 
 
-t_list			*interpreter(char *line);
+t_AST_Node			*interpreter(char *line);
 t_list			*lexical_analyzer(char *line);
 char			*get_special_item(char **line, int *cur_option);
 char			*get_plain_item(char **line);
-t_list			*syntax_analyzer(t_list *token);
+t_AST_Node		*syntax_analyzer(t_list *token);
 t_AST_Node		*parse_cmd(t_list **token);
 t_AST_Node		*parse_get_node(t_list **token);
 int				seriezer(t_list *token, t_list **curr);
@@ -111,3 +111,5 @@ void			*ft_free_ret(void *target, void *ret);
 
 void	print_AST(t_AST_Node	*AST, int depth);
 void	print_CMD(t_cmd *cmd, int depth);
+
+//void 	ft_print_token(t_list *token, int case);
